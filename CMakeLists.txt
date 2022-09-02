@@ -5,11 +5,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(FetchContent)
 
-set(PopSift_BUILD_EXAMPLES OFF)
+set(PopSift_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_Declare(
   popsift
   GIT_REPOSITORY https://github.com/uav4geo/popsift/
-  GIT_TAG        develop
+  GIT_TAG        270
 )
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(popsift)
@@ -21,4 +21,7 @@ target_link_libraries(pypopsift PUBLIC popsift)
 
 if (DEFINED OUTPUT_DIR)
     set_target_properties(pypopsift PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
+    set_target_properties(pypopsift PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG "${OUTPUT_DIR}")
+    set_target_properties(pypopsift PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE "${OUTPUT_DIR}")
+    set_target_properties(pypopsift PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO "${OUTPUT_DIR}")
 endif()
