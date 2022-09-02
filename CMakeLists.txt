@@ -9,7 +9,7 @@ set(PopSift_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_Declare(
   popsift
   GIT_REPOSITORY https://github.com/uav4geo/popsift/
-  GIT_TAG        develop
+  GIT_TAG        270
 )
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(popsift)
