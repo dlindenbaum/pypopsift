@@ -9,7 +9,7 @@ include(FetchContent)
 set(PopSift_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_Declare(
   popsift
-  GIT_REPOSITORY https://github.com/uav4geo/popsift/
+  GIT_REPOSITORY https://github.com/braincorp/popsift/
   GIT_TAG        270
 )
 set(FETCHCONTENT_QUIET OFF)
