@@ -6,9 +6,11 @@ This library is a wrapper around [PopSift](https://github.com/alicevision/popsif
 ## Building
 
 Requirements:
- * CUDA Toolkit >= 7
+ * CUDA Toolkit >= 10
+    * https://developer.nvidia.com/cuda-downloads
  * CMake >= 3.14
- * A C++11 capable compiler (g++ 5.4.0 works fine)
+ * A C++11 capable compiler (g++-7, gcc-7)
+ * python3.10-dev
 
 ```
 # git clone --recurse-submodules https://github.com/uav4geo/pypopsift
