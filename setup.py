@@ -1,16 +1,15 @@
 import os
-import re
-import sys
 import platform
+import re
 import subprocess
-import shutil
+import sys
+from distutils.version import LooseVersion
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
-from setuptools.command.install_lib import install_lib
-from distutils.version import LooseVersion
 
 PACKAGE_NAME = 'pypopsift'
+
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -50,7 +49,7 @@ class CMakeBuild(build_ext):
 
         if platform.system() == "Windows":
             cmake_args += ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(cfg.upper(), extdir)]
-            if sys.maxsize > 2**32:
+            if sys.maxsize > 2 ** 32:
                 cmake_args += ['-A', 'x64']
             build_args += ['--', '/m']
         else:
@@ -62,9 +61,10 @@ class CMakeBuild(build_ext):
                                                               self.distribution.get_version())
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
-        
+
         subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env)
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
+
 
 setup(
     name=PACKAGE_NAME,
@@ -74,7 +74,7 @@ setup(
     description='Python module for CUDA accelerated GPU SIFT ',
     long_description='',
     ext_modules=[CMakeExtension(PACKAGE_NAME)],
-    #package_data={'': ['libpopsift.so.1.0.0']}
+    # package_data={'': ['libpopsift.so.1.0.0']}
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )
