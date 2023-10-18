@@ -13,9 +13,10 @@ Requirements:
  * python3.10-dev
 
 ```
-# git clone --recurse-submodules https://github.com/uav4geo/pypopsift
-# cd pypopsift && mkdir build && cd build
-# make -j8
+git clone --recurse-submodules https://github.com/uav4geo/pypopsift
+cd pypopsift && mkdir build && cd build
+cmake ..
+make -j8
 ```
 
 To install the Python package:
