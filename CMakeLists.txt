@@ -9,8 +9,8 @@ include(FetchContent)
 set(PopSift_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_Declare(
   popsift
-  GIT_REPOSITORY https://github.com/braincorp/popsift/
-  GIT_TAG        270
+  GIT_REPOSITORY git@github.com:braincorp/popsift.git
+  GIT_TAG        1.0.0
 )
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(popsift)
