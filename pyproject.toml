@@ -11,4 +11,4 @@ description = "Python module for CUDA accelerated GPU SIFT"
 readme = "README.md"
 requires-python = ">=3.10, <3.11"
 license = {file = "LICENSE"}
-dynamic = ["version"]
+version = "1.0.2+brain0"
