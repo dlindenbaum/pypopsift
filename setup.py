@@ -67,14 +67,7 @@ class CMakeBuild(build_ext):
 
 
 setup(
-    name=PACKAGE_NAME,
-    version='1.0.0',
-    author='Piero Toffanin',
-    author_email='pt@uav4geo.com',
-    description='Python module for CUDA accelerated GPU SIFT ',
-    long_description='',
     ext_modules=[CMakeExtension(PACKAGE_NAME)],
-    # package_data={'': ['libpopsift.so.1.0.0']}
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )

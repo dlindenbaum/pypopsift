@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pypopsift"
+authors = [
+    {name = "Piero Toffanin", email = "pt@uav4geo.com"},
+]
+description = "Python module for CUDA accelerated GPU SIFT"
+readme = "README.md"
+requires-python = ">=3.10, <3.11"
+license = {file = "LICENSE"}
+dynamic = ["version"]
