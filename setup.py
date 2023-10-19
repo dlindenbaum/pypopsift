@@ -69,5 +69,6 @@ class CMakeBuild(build_ext):
 setup(
     ext_modules=[CMakeExtension(PACKAGE_NAME)],
     cmdclass=dict(build_ext=CMakeBuild),
+    package_data={'': ['libpopsift.so.1.0.0']},
     zip_safe=False,
 )
