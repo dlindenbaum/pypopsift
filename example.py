@@ -1,14 +1,10 @@
 import cv2
-import numpy as np
+import skimage.data
 from pypopsift import popsift
 import time
 
 print("Loading image...")
 
-files = [
-    "/datasets/brighton2/images/DJI_0018.JPG",
-    "/datasets/brighton2/images/DJI_0019.JPG",
-]
 config = {
     'sift_peak_threshold': 0.1,
     'sift_edge_threshold': 10.0,
@@ -16,6 +12,7 @@ config = {
     'feature_use_adaptive_suppression': False,
     'feature_process_size': 2048
 }
+
 
 def resized_image(image, config):
     """Resize image to feature_process_size."""
@@ -28,30 +25,26 @@ def resized_image(image, config):
     else:
         return image
 
-for filename in files:
-    flags = cv2.IMREAD_COLOR
-    image = cv2.imread(filename, flags)
 
-    if image is None:
-        raise IOError("Unable to load image {}".format(filename))
+image = skimage.data.astronaut()
 
-    if len(image.shape) == 3:
-        image[:, :, :3] = image[:, :, [2, 1, 0]]
+if len(image.shape) == 3:
+    image[:, :, :3] = image[:, :, [2, 1, 0]]
 
-    assert len(image.shape) == 3
-    image = resized_image(image, config)
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+assert len(image.shape) == 3
+image = resized_image(image, config)
+image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 
-    print("Computing features...")
-    start = time.time()
-    points, desc = popsift(image,
-                            peak_threshold=config['sift_peak_threshold'],
-                            edge_threshold=config['sift_edge_threshold'],
-                            target_num_features=config['feature_min_frames'],
-                            downsampling=-1)
+print("Computing features...")
+start = time.time()
+points, desc = popsift(image,
+                       peak_threshold=config['sift_peak_threshold'],
+                       edge_threshold=config['sift_edge_threshold'],
+                       target_num_features=config['feature_min_frames'],
+                       downsampling=-1)
 
-    print(points.shape)
-    print(points)
-    print(desc.shape)
-    print(desc)
-    print("Features computed in {:.3f} seconds".format(time.time() - start))
+print(points.shape)
+print(points)
+print(desc.shape)
+print(desc)
+print("Features computed in {:.3f} seconds".format(time.time() - start))
