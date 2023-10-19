@@ -37,11 +37,12 @@ image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 
 print("Computing features...")
 start = time.time()
-points, desc = popsift(image,
-                       peak_threshold=config['sift_peak_threshold'],
-                       edge_threshold=config['sift_edge_threshold'],
-                       target_num_features=config['feature_min_frames'],
-                       downsampling=-1)
+points, desc = popsift(
+    image,
+    peak_threshold=config['sift_peak_threshold'],
+    edge_threshold=config['sift_edge_threshold'],
+    downsampling=-1,
+)
 
 print(points.shape)
 print(points)
