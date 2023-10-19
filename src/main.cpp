@@ -9,7 +9,7 @@ PYBIND11_MODULE(pypopsift, m) {
     )pbdoc";
 
     m.def("popsift", pps::popsift,
-        py::arg("images"),
+        py::arg("image"),
         py::arg("peak_threshold") = 0.1,
         py::arg("edge_threshold") = 10,
         py::arg("use_root") = true,

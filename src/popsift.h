@@ -62,7 +62,6 @@ public:
 py::object popsift(pyarray_uint8 image,
                  float peak_threshold,
                  float edge_threshold,
-                 int target_num_features,
                  bool use_root,
                  float downsampling);
 
