@@ -123,4 +123,19 @@ bool fitsTexture(int width, int height, float downsampling){
     return a == PopSift::AllocTest::Ok;
 }
 
+bool cudaIsAvailable(){
+    int currentDevice;
+    if (cudaGetDevice( &currentDevice ) != 0){
+        // Try resetting
+        cudaDeviceReset();
+
+        cudaError_t err;
+        if ((err = cudaGetDevice( &currentDevice )) != 0){
+            return false;
+        }
+    }
+
+    return true;
 }
+
+} // namespace pps

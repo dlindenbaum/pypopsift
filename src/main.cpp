@@ -26,6 +26,8 @@ PYBIND11_MODULE(pypopsift, m) {
             py::arg("height"),
             py::arg("downsampling") = -1);
 
+    m.def("cuda_is_available", pps::cudaIsAvailable);
+
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;
 #else

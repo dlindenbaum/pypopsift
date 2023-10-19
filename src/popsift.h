@@ -67,4 +67,6 @@ py::object popsift(pyarray_uint8 image,
 
 bool fitsTexture(int width, int height, float downsampling);
 
-}
+bool cudaIsAvailable();
+
+} // namespace pps
