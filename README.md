@@ -13,7 +13,7 @@ Requirements:
  * python3.10-dev
 
 ```
-git clone --recurse-submodules https://github.com/uav4geo/pypopsift
+git clone --recurse-submodules git@github.com:braincorp/pypopsift.git
 cd pypopsift && mkdir build && cd build
 cmake ..
 make -j8
@@ -22,8 +22,8 @@ make -j8
 To install the Python package:
 
 ```
-# cd pypopsift
-# pip install .
+cd pypopsift
+pip install .
 ```
 
 ## Usage
