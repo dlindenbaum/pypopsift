@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "auditwheel"]
+requires = ["setuptools", "auditwheel", "patchelf>=0.14"]
 build-backend = "setuptools.build_meta"
 
 [project]
