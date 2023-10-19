@@ -5,22 +5,13 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(pypopsift, m) {
     m.doc() = R"pbdoc(
-        pypopsift: Python module for CUDA accelerated GPU SIFT 
-        -----------------------
-
-        .. currentmodule:: pypopsift
-
-        .. autosummary::
-           :toctree: _generate
-
-           popsift
+        pypopsift: Python module for CUDA accelerated GPU SIFT
     )pbdoc";
 
     m.def("popsift", pps::popsift,
-        py::arg("image"),
+        py::arg("images"),
         py::arg("peak_threshold") = 0.1,
         py::arg("edge_threshold") = 10,
-        py::arg("target_num_features") = 4000,
         py::arg("use_root") = true,
         py::arg("downsampling") = -1
     );
