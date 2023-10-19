@@ -9,6 +9,11 @@ PYBIND11_MODULE(pypopsift, m) {
     )pbdoc";
 
     m.def("popsift", pps::popsift,
+        "Compute SIFT keypoints and descriptors on GPU\n\n"
+        "Returns:\n"
+        "    [keypoints, descriptors]\n"
+        "    keypoints: Shape[n, x, y, size, angle]\n"
+        "    descriptors: Shape[n, 128]",
         py::arg("image"),
         py::arg("peak_threshold") = 0.1,
         py::arg("edge_threshold") = 10,
