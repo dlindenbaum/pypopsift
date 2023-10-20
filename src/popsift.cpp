@@ -129,8 +129,7 @@ bool cudaIsAvailable(){
         // Try resetting
         cudaDeviceReset();
 
-        cudaError_t err;
-        if ((err = cudaGetDevice( &currentDevice )) != 0){
+        if (cudaGetDevice( &currentDevice ) != 0){
             return false;
         }
     }
