@@ -12,7 +12,7 @@ PYBIND11_MODULE(pypopsift, m) {
         "Compute SIFT keypoints and descriptors on GPU\n\n"
         "Returns:\n"
         "    [keypoints, descriptors]\n"
-        "    keypoints: Shape[n, x, y, size, angle]\n"
+        "    keypoints: Shape[n, 4] where the 2nd dimension is [x, y, size, angle]\n"
         "    descriptors: Shape[n, 128]",
         py::arg("image"),
         py::arg("peak_threshold") = 0.04,
