@@ -28,6 +28,7 @@ PopSiftContext::PopSiftContext() : ps(nullptr){
 }
 
 PopSiftContext::~PopSiftContext(){
+    ps->uninit();
     delete ps;
     ps = nullptr;
     delete config;
