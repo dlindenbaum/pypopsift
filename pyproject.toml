@@ -1,5 +1,11 @@
 [build-system]
-requires = ["setuptools", "auditwheel", "patchelf>=0.14"]
+requires = [
+    "setuptools",
+    "auditwheel",
+    "patchelf>=0.14",
+    "cuda-python",
+    "cmake>=3.10",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,3 +18,6 @@ readme = "README.md"
 requires-python = ">=3.10, <3.11"
 license = {file = "LICENSE"}
 version = "1.0.2+brain0"
+
+[tool.cibuildwheel]
+test-command = "python src/tests/test.py"

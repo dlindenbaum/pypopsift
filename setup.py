@@ -68,23 +68,8 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 
-class PostInstallCommand(install):
-    """Post-installation for installation mode."""
-
-    def run(self):
-        install.run(self)
-        # run auditwheel
-        if platform.system() == 'Linux':
-            # todo: don't hard-code the wheel path
-            # wheel_name = f"{PACKAGE_NAME}-{self.distribution.get_version()}-{get_impl_tag()}-{get_abi_tag()}-{get_platform()}.whl"
-            subprocess.check_call(
-                ['auditwheel', 'repair', "dist/pypopsift-1.0.2+brain0-cp310-cp310-linux_x86_64.whl",
-                 '--wheel-dir', "dist", "--plat", "manylinux_2_35_x86_64"]
-            )
-
-
 setup(
     ext_modules=[CMakeExtension(PACKAGE_NAME)],
-    cmdclass=dict(build_ext=CMakeBuild, install=PostInstallCommand),
+    cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )
