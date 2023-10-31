@@ -1,7 +1,6 @@
 
 #include "popsift.h"
 #include <algorithm>
-#include <cmath>
 #include <mutex>
 
 namespace pps{
@@ -135,6 +134,12 @@ bool cudaIsAvailable(){
     }
 
     return true;
+}
+
+std::tuple<int, int> getCudaMemoryInfo(){
+    size_t free, total;
+    cudaMemGetInfo(&free, &total);
+    return std::make_tuple(free, total);
 }
 
 } // namespace pps

@@ -22,11 +22,19 @@ PYBIND11_MODULE(pypopsift, m) {
     );
 
     m.def("fits_texture", pps::fitsTexture,
-            py::arg("width"),
-            py::arg("height"),
-            py::arg("downsampling") = -1);
+        "Check if the image fits in the texture memory",
+        py::arg("width"),
+        py::arg("height"),
+        py::arg("downsampling") = -1
+    );
 
     m.def("cuda_is_available", pps::cudaIsAvailable);
+
+    m.def("get_cuda_memory_info", pps::getCudaMemoryInfo,
+        "Get the free and total memory of the current CUDA device\n\n"
+        "Returns:\n"
+        "    (free_bytes, total_bytes)"
+    );
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

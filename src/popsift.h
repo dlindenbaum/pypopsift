@@ -69,4 +69,6 @@ bool fitsTexture(int width, int height, float downsampling);
 
 bool cudaIsAvailable();
 
+std::tuple<int, int> getCudaMemoryInfo();
+
 } // namespace pps
