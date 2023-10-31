@@ -6,10 +6,6 @@ on:
     types:
       - published
 
-env:
-  CIBW_PROJECT_REQUIRES_PYTHON: ">=3.10"
-  CIBW_SKIP: pp*
-
 jobs:
   create-runner:
     runs-on: ubuntu-latest

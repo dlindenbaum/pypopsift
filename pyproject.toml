@@ -1,10 +1,6 @@
 [build-system]
 requires = [
     "setuptools",
-    "auditwheel",
-    "patchelf>=0.14",
-    "cuda-python",
-    "cmake>=3.10",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -20,4 +16,10 @@ license = {file = "LICENSE"}
 version = "1.0.2+brain0"
 
 [tool.cibuildwheel]
-test-command = "python src/tests/test.py"
+test-command = "python tests/test.py"
+manylinux-x86_64-image = "sameli/manylinux2014_x86_64_cuda_12.2"
+
+[tool.cibuildwheel.linux]
+# todo: build for mac, other pythons, and ARM
+build = ["cp310-manylinux_x86_64"]
+skip = ["pp*"]  # don't build for pypy
