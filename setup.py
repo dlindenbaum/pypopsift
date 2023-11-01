@@ -3,8 +3,6 @@ import platform
 import re
 import subprocess
 import sys
-from distutils.command.install import install
-from distutils.util import get_platform
 from distutils.version import LooseVersion
 
 from setuptools import setup, Extension
@@ -41,8 +39,11 @@ class CMakeBuild(build_ext):
         if not extdir.endswith(os.path.sep):
             extdir += os.path.sep
 
-        cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
-                      '-DPYTHON_EXECUTABLE=' + sys.executable]
+        cmake_args = [
+            '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
+            '-DPYTHON_EXECUTABLE=' + sys.executable,
+            '-DBUILD_SHARED_LIBS=ON',
+        ]
 
         cfg = 'Debug' if self.debug else 'Release'
         build_args = ['--config', cfg]
@@ -56,7 +57,7 @@ class CMakeBuild(build_ext):
             build_args += ['--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            build_args += ['--', '-j4']
+            build_args += ['--', f'-j{os.cpu_count()}']
 
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
@@ -68,23 +69,8 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 
-class PostInstallCommand(install):
-    """Post-installation for installation mode."""
-
-    def run(self):
-        install.run(self)
-        # run auditwheel
-        if platform.system() == 'Linux':
-            # todo: don't hard-code the wheel path
-            # wheel_name = f"{PACKAGE_NAME}-{self.distribution.get_version()}-{get_impl_tag()}-{get_abi_tag()}-{get_platform()}.whl"
-            subprocess.check_call(
-                ['auditwheel', 'repair', "dist/pypopsift-1.0.2+brain0-cp310-cp310-linux_x86_64.whl",
-                 '--wheel-dir', "dist", "--plat", "manylinux_2_35_x86_64"]
-            )
-
-
 setup(
     ext_modules=[CMakeExtension(PACKAGE_NAME)],
-    cmdclass=dict(build_ext=CMakeBuild, install=PostInstallCommand),
+    cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )

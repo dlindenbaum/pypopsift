@@ -1,5 +1,7 @@
 [build-system]
-requires = ["setuptools", "auditwheel", "patchelf>=0.14"]
+requires = [
+    "setuptools",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -11,4 +13,16 @@ description = "Python module for CUDA accelerated GPU SIFT"
 readme = "README.md"
 requires-python = ">=3.10, <3.11"
 license = {file = "LICENSE"}
-version = "1.0.2+brain0"
+version = "1.0.2+brain1"
+dependencies = [
+    "numpy",
+]
+
+[tool.cibuildwheel]
+test-command = "python /project/tests/test.py"
+manylinux-x86_64-image = "sameli/manylinux2014_x86_64_cuda_12.2"
+
+[tool.cibuildwheel.linux]
+# todo: build for mac, other pythons, and ARM
+build = ["cp310-manylinux_x86_64"]
+skip = ["pp*"]  # don't build for pypy

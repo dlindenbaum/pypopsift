@@ -14,9 +14,10 @@ Requirements:
 
 ```
 git clone --recurse-submodules git@github.com:braincorp/pypopsift.git
-cd pypopsift && mkdir build && cd build
-cmake ..
-make -j8
+python3.10 -m venv venv
+source venv/bin/activate
+pip install cibuildwheel
+cibuildwheel --platform linux --output-dir wheelhouse
 ```
 
 To install the Python package:
