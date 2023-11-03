@@ -20,7 +20,7 @@ dependencies = [
 
 [tool.cibuildwheel]
 test-command = "python /project/tests/test.py"
-manylinux-x86_64-image = "sameli/manylinux2014_x86_64_cuda_12.2"
+manylinux-x86_64-image = "sameli/manylinux2014_x86_64_cuda_11.8"
 
 [tool.cibuildwheel.linux]
 # todo: build for mac, other pythons, and ARM
